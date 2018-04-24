@@ -21,7 +21,7 @@ public class TweetController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView index(ModelAndView mav) {
-    	List<Tweet> tweets = tweetRepository.findAll();
+    	List<Tweet> tweets = tweetRepository.findAllByOrderByIdDesc();
     	mav.addObject("tweets",tweets);
         mav.setViewName("tweet/index");
         return mav;
