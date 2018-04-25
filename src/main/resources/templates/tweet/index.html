@@ -30,7 +30,7 @@
 <div class="contents row" th:each="tweet : ${tweets}">
 <div class="content__post" th:style="'background-image: url(' + @{${tweet.image}} + ');'">
 <p th:text="$tweet.text}"></p>
-<span class="name" th:text="${tweet.name}"></span></div></div>
+<span class="name" th:text="${tweet.name.username}"></span></div></div>
 
 <div class ="contents raw">
  <ul class="pagination" style="text-align: center;">
