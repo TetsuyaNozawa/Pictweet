@@ -47,6 +47,9 @@
         <div class="more">
             <span>■</span>
             <ul class="more_list">
+            <li>
+                      <a th:href="@{'/tweet/' + ${tweet.id}}">詳細</a>
+                    </li>
                 <li><a th:href="@{'/tweet/' + ${tweet.id} + '/edit'}">編集</a></li>
                 <li>
                     <form th:action="@{'/tweet/' + ${tweet.id} + '/delete'}" method="post">

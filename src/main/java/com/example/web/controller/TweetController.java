@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.example.business.domain.Tweet;
 import com.example.business.domain.User;
@@ -53,6 +54,15 @@ public class TweetController {
     	tweetRepository.saveAndFlush(tweet);
     	mav.setViewName("tweet/create");
     	return mav;
+    }
+    
+    @RequestMapping(value = "/tweet/{id}", method = RequestMethod.GET)
+    ModelAndView show(@PathVariable Long id, ModelAndView mav) {
+        Tweet tweet = tweetRepository.findOne(id);
+        mav.addObject("tweet", tweet);
+        mav.setViewName("tweet/show");
+        return mav;
+    
     }
     
     @ModelAttribute(name = "login_user")
