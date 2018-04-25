@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.business.domain.User;
 import com.example.business.repository.UserRepository;
+import com.example.until.UserCustom;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -25,7 +26,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		User user = userRepository.findByEmail(email) ;
 		Set<GrantedAuthority> grantedAutorities = new HashSet<>();
 		
-		return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAutorities);
+		return new UserCustom (user.getId(), user.getUsername(), user.getPassword(), grantedAutorities);
 			
 		}
 	}
