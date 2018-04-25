@@ -4,11 +4,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "tweets")
 public class Tweet {
+	
+	@ManyToOne
+	private User user;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -50,5 +54,11 @@ public class Tweet {
 
 	public void setText(String text) {
 		this.text =text;
+	}
+	public User getuser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
 	}
 }
