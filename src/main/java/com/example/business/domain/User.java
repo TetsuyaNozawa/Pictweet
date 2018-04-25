@@ -17,6 +17,7 @@ public class User {
 	private Long id;
 	private String username;
 	private String password;
+	private String email;
 	@Transient
 	private String passwordConfirmation;
 	
@@ -50,6 +51,14 @@ public class User {
 	
 	public void setPasswordConfirmation(String passwordConfirmation) {
 		this.passwordConfirmation = passwordConfirmation;
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+	
+	public void setEmail(String email) {
+		this.email= email;
 	}
 
 }
