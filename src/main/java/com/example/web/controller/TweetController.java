@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -21,9 +24,10 @@ public class TweetController {
 	private TweetRepository tweetRepository;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView index(@PageableDefault(size = 5) Pageable pageable,ModelAndView mav) {
+    public ModelAndView index(@PageableDefault(size = 5) Pageable pageable,ModelAndView mav,@AuthenticationPrincipal UserDetails userDetails) {
     	Page<Tweet> tweets = tweetRepository.findAllByOrderByIdDesc(pageable);
-    	mav.addObject("tweets",tweets);
+    	mav.addObject("tweet",tweets);
+    	mav.addObject("login_user",userDetails);
         mav.setViewName("tweet/index");
         return mav;
     }
@@ -39,6 +43,11 @@ public class TweetController {
     	tweetRepository.saveAndFlush(newTweet);
     	mav.setViewName("tweet/create");
     	return mav;
+    }
+    
+    @ModelAttribute(name = "login_user")
+    public UserDetails setLoginUser(@AuthenticationPrincipal UserDetails userDetails) {
+    	return userDetails;
     }
 
 }
