@@ -54,7 +54,7 @@ public class TweetController {
     	tweetRepository.saveAndFlush(tweet);
     	mav.setViewName("tweet/create");
     	return mav;
-    }
+    }v
     
     @RequestMapping(value = "/tweet/{id}", method = RequestMethod.GET)
     ModelAndView show(@PathVariable Long id, ModelAndView mav) {
